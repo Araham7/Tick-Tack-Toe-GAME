@@ -1,0 +1,33 @@
+/* (1). Universal Css :--- */
+*{
+    margin: 0px;
+    padding: 0px;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+/* (2). ".main-body" Css :--- */
+.main-body{
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #50a50b;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* (3). ".card-container" Css :--- */
+.heading {
+    position: fixed;
+    top: 10px;
+    text-align: center;
+
+    text-decoration: underline;
+
+    font-size: x-large;
+    font-weight: 700;
+}
