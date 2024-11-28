@@ -50,6 +50,7 @@ function Grid({ numberOfCards }) {
       <div className="grid">
         {board.map((element, index) => (
           <Card
+          gameEnd={ winner ? true : false }
             key={index}
             onPlay={play}
             player={element}
