@@ -1,24 +1,20 @@
-import Icon from "../Icon/Icon.jsx"; // Importing "Icon" component.
-import "./Card.css"; // Importing "Card.css" for styling.
+import Icon from "../Icon/Icon.jsx";
+import "./Card.css";
 
-function Card({ player, onPlay, index , gameEnd }) {
-  let icon = <Icon />; // Default icon (pen icon).
-
-  if (player === "O") {
-    icon = <Icon name="circle" />; // "circle-icon" for player O.
-  } else if (player === "X") {
-    icon = (
-      <Icon name="cross"/> // "cross-icon" for player X with onClick handler.
-    );
-  }
+function Card({ player, index, onPlay, disabled, hoverSymbol }) {
+  const filled = player !== "";
 
   return (
-    <div className="card"  onClick={() => !gameEnd && onPlay(index)} >
-      {icon}
-    </div>
+    <button
+      type="button"
+      className="cell"
+      onClick={() => onPlay(index)}
+      disabled={disabled || filled}
+      aria-label={filled ? `Square ${index + 1}, ${player}` : `Square ${index + 1}, empty`}
+    >
+      {filled ? <Icon name={player} /> : !disabled && <Icon name={hoverSymbol} ghost />}
+    </button>
   );
 }
 
 export default Card;
-
-

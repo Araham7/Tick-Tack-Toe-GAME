@@ -1,24 +1,27 @@
-function isWinner(board, symbol) {
-    // Row-wise checking
-    if (board[0] === symbol && board[1] === symbol && board[2] === symbol) return symbol;
-    if (board[3] === symbol && board[4] === symbol && board[5] === symbol) return symbol;
-    if (board[6] === symbol && board[7] === symbol && board[8] === symbol) return symbol;
-  
-    // Column-wise checking
-    if (board[0] === symbol && board[3] === symbol && board[6] === symbol) return symbol;
-    if (board[1] === symbol && board[4] === symbol && board[7] === symbol) return symbol;
-    if (board[2] === symbol && board[5] === symbol && board[8] === symbol) return symbol;
-  
-    // Diagonal-wise checking
-    if (board[0] === symbol && board[4] === symbol && board[8] === symbol) return symbol;
-    if (board[2] === symbol && board[4] === symbol && board[6] === symbol) return symbol;
-  
-    // No winner
-    return "";
+// Board index layout:
+// 0 1 2
+// 3 4 5
+// 6 7 8
+
+export const WIN_LINES = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+  [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+  [0, 4, 8], [2, 4, 6],            // diagonals
+];
+
+/**
+ * Board check karta hai.
+ * @returns {{ winner: "X" | "O", line: number[] } | null}
+ */
+export function getWinner(board) {
+  for (const [a, b, c] of WIN_LINES) {
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return { winner: board[a], line: [a, b, c] };
+    }
   }
-  
-  export default isWinner;
+  return null;
+}
 
-
-
-
+export function isBoardFull(board) {
+  return board.every((cell) => cell !== "");
+}

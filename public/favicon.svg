@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Notebook paper tile -->
+  <rect x="1" y="1" width="62" height="62" rx="14" fill="#fbfdff" stroke="#d4e4f3" stroke-width="2"/>
+
+  <!-- Hand-drawn board -->
+  <g fill="none" stroke="#2b2f3a" stroke-width="3.5" stroke-linecap="round">
+    <path d="M23 7 C 22 24, 23.8 40, 22.6 57"/>
+    <path d="M41.5 7 C 42.4 24, 40.8 40, 41.8 57"/>
+    <path d="M7 23 C 24 22, 40 23.8, 57 22.6"/>
+    <path d="M7 41.5 C 24 42.4, 40 40.8, 57 41.8"/>
+  </g>
+
+  <!-- Red X (top-left) -->
+  <path d="M8 8 L17 17 M17 8 L8 17" fill="none" stroke="#d7263d" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Blue O (centre) -->
+  <path d="M32 25 C 37 25, 39.5 28.5, 39.5 32.5 C 39.5 36.8, 36.2 39.6, 32 39.6 C 27.8 39.6, 24.8 36.6, 24.8 32.4 C 24.8 28.4, 27.8 25.2, 33.5 25.8"
+        fill="none" stroke="#1f4fd1" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Red X (bottom-right) -->
+  <path d="M47 47 L56 56 M56 47 L47 56" fill="none" stroke="#d7263d" stroke-width="4" stroke-linecap="round"/>
+</svg>

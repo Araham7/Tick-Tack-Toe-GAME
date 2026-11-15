@@ -1,12 +1,60 @@
-.card{
-    background-color: burlywood;
-    border: 2px solid black;
-    border-radius: 1rem;
-    width: 60px;
-    height: 60px;
+.cell {
+  border: none;
+  background: transparent;
+  padding: 14%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px;
+.cell:disabled {
+  cursor: default;
+}
+
+.cell:focus-visible {
+  outline: 2px dashed var(--graphite);
+  outline-offset: -8px;
+}
+
+/* ---------- Ink marks ---------- */
+.mark {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mark path {
+  fill: none;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ink 0.28s ease-out forwards;
+}
+
+.mark-x path { stroke: var(--ink-red); }
+.mark-o path { stroke: var(--ink-blue); animation-duration: 0.4s; }
+.mark-x path.second { animation-delay: 0.2s; }
+
+/* Hover par halka pencil preview */
+.mark.ghost {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.mark.ghost path {
+  animation: none;
+  stroke-dashoffset: 0;
+  stroke: var(--graphite);
+  stroke-width: 5;
+}
+.cell:hover .mark.ghost,
+.cell:focus-visible .mark.ghost {
+  opacity: 0.16;
+}
+
+@keyframes ink {
+  to { stroke-dashoffset: 0; }
 }

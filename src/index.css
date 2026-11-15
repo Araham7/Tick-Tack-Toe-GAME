@@ -1,0 +1,122 @@
+:root {
+  --paper: #fbfdff;
+  --rule: #d4e4f3;
+  --margin: #f08a94;
+  --graphite: #2b2f3a;
+  --graphite-soft: #6b7180;
+  --ink-blue: #1f4fd1;
+  --ink-red: #d7263d;
+  --highlighter: #ffe45c;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Kalam", "Comic Sans MS", cursive;
+  color: var(--graphite);
+  background-color: var(--paper);
+  /* Notebook ki blue lines */
+  background-image: linear-gradient(transparent 31px, var(--rule) 31px, var(--rule) 32px);
+  background-size: 100% 32px;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+.main-body {
+  position: relative;
+  min-height: 100vh;
+  padding: 36px 20px 28px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Laal margin line */
+.main-body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 48px;
+  border-left: 2px solid var(--margin);
+  box-shadow: 5px 0 0 -3px var(--margin);
+  pointer-events: none;
+}
+
+.heading {
+  font-size: clamp(2.6rem, 11vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1;
+  transform: rotate(-2deg);
+}
+
+/* ---------- Mode / difficulty (selected wala gol gherra) ---------- */
+.toggle {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.toggle button {
+  border: 2.5px solid transparent;
+  background: transparent;
+  color: var(--graphite-soft);
+  font-size: 1.1rem;
+  padding: 6px 20px;
+  cursor: pointer;
+  /* Pen se gol gherne jaisa oval */
+  border-radius: 48% 52% 46% 54% / 62% 44% 56% 40%;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.toggle button:hover {
+  color: var(--graphite);
+}
+.toggle button.selected {
+  transform: rotate(-2deg);
+  color: var(--graphite);
+  font-weight: 700;
+  border-color: var(--graphite);
+}
+.toggle button:focus-visible {
+  outline: 2px dashed var(--ink-blue);
+  outline-offset: 2px;
+}
+.toggle.small button {
+  font-size: 0.95rem;
+  padding: 4px 14px;
+}
+.toggle.small button.selected {
+  border-color: var(--ink-red);
+  color: var(--ink-red);
+}
+
+.footer {
+  font-size: 0.95rem;
+  color: var(--graphite-soft);
+}
+
+@media (max-width: 480px) {
+  .main-body { padding-left: 44px; }
+  .main-body::before { left: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    transition: none !important;
+  }
+}

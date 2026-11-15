@@ -1,64 +1,160 @@
-.grid{
-    width: 225px;
-    height: 225px;
-
-    background-color: #09a5ff;
-
-    border: 2px solid black;
-    border-radius: 20px;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    /* justify-content: center; */
-    justify-content: space-between;
-    align-items: center;
-
+.game {
+  width: min(88vw, 400px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
 }
 
-.current-turn-status{
-    margin: 20px;
+/* ---------- Score, likha hua jaise ---------- */
+.scoreboard {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 12px;
 }
 
-/* .reset-btn{
-    padding: 12px;
-    background-color: #09a5ff;
-    border: 2px solid black;
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  gap: 4px;
+}
+.score-name {
+  font-size: 1.05rem;
+  color: var(--graphite-soft);
+  text-decoration: underline wavy transparent;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+.score-value {
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+.score-o .score-value { color: var(--ink-blue); }
+.score-x .score-value { color: var(--ink-red); }
+.score-draw .score-value { color: var(--graphite-soft); font-size: 1.9rem; }
 
-    border-radius: 1rem;
+.score-o.active .score-name { color: var(--ink-blue); text-decoration-color: var(--ink-blue); }
+.score-x.active .score-name { color: var(--ink-red); text-decoration-color: var(--ink-red); }
 
-    font-size: medium;
-    font-weight: 900;
+/* ---------- Board ---------- */
+.board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
-.reset-btn:hover{
-    background-color: #fff;
-} */
-
-.reset-btn {
-    padding: 12px 24px;
-    background-color: #09a5ff;
-    border: 2px solid black;
-    border-radius: 1rem;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    /* text-transform: uppercase; */
-    cursor: pointer;
-    transition: all 0.3s ease;
+.board-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.reset-btn:hover {
-    background-color: #007bb5;
-    border-color: #005f8b;
-    transform: scale(1.05);
+.board-lines path {
+  fill: none;
+  stroke: var(--graphite);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 0.45s ease-out forwards;
+}
+/* Page load par board ki 4 lines ek-ek karke khinchti hain */
+.board-lines path:nth-of-type(2) { animation-delay: 0.15s; }
+.board-lines path:nth-of-type(3) { animation-delay: 0.3s; }
+.board-lines path:nth-of-type(4) { animation-delay: 0.45s; }
+
+.highlighter {
+  stroke: var(--highlighter);
+  stroke-width: 46;
+  stroke-linecap: butt;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 0.4s 0.3s ease-in-out forwards;
 }
 
-.reset-btn:active {
-    background-color: #005f8b;
-    transform: scale(0.98);
+.cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
 
-.reset-btn:focus {
-    outline: none;
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- Status ---------- */
+.status {
+  min-height: 1.5em;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--graphite);
+}
+.status-end {
+  background: linear-gradient(transparent 55%, var(--highlighter) 55%, var(--highlighter) 92%, transparent 92%);
+  padding: 0 6px;
+}
+
+/* ---------- Buttons (hand-drawn border) ---------- */
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 8px 22px;
+  cursor: pointer;
+  color: var(--graphite);
+  background: transparent;
+  border: 2.5px solid var(--graphite);
+  border-radius: 14px 22px 12px 24px / 22px 12px 24px 14px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--graphite);
+}
+.btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.btn:focus-visible {
+  outline: 2px dashed var(--ink-blue);
+  outline-offset: 4px;
+}
+
+.btn-primary {
+  background: var(--graphite);
+  color: var(--paper);
+  transform: rotate(-1deg);
+}
+.btn-primary:hover {
+  box-shadow: 3px 3px 0 var(--ink-red);
+}
+
+.btn-quiet {
+  border-color: transparent;
+  color: var(--graphite-soft);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.btn-quiet:hover {
+  box-shadow: none;
+  color: var(--graphite);
 }
